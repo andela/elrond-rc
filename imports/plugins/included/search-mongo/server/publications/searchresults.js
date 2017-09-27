@@ -10,7 +10,7 @@ function getProductFindTerm(searchTerm, searchTags, userId) {
   const shopId = Reaction.getShopId();
   const findTerm = {
     $and: [
-      { shopId: shopId },
+      { shopId },
       {
         $or: [
           {
@@ -30,7 +30,7 @@ function getProductFindTerm(searchTerm, searchTags, userId) {
     ]
   };
   if (searchTags.length) {
-    findTerm.hashtags = {$all: searchTags};
+    findTerm.hashtags = { $all: searchTags };
   }
   if (!Roles.userIsInRole(userId, ["admin", "owner"], shopId)) {
     findTerm.isVisible = true;
@@ -46,14 +46,14 @@ getResults.products = function (searchTerm, facets, maxResults, userId) {
   const productResults = ProductSearch.find(findTerm,
     {
       fields: {
-        score: {$meta: "textScore"},
+        score: { $meta: "textScore" },
         title: 1,
         hashtags: 1,
         description: 1,
         handle: 1,
         price: 1
       },
-      sort: {score: {$meta: "textScore"}},
+      sort: { score: { $meta: "textScore" } },
       limit: maxResults
     }
   );
@@ -66,8 +66,8 @@ getResults.orders = function (searchTerm, facets, maxResults, userId) {
   const shopId = Reaction.getShopId();
   const findTerm = {
     $and: [
-      { shopId: shopId },
-      {$or: [
+      { shopId },
+      { $or: [
         { _id: searchTerm },
         { userEmails: {
           $regex: searchTerm,
@@ -90,7 +90,7 @@ getResults.orders = function (searchTerm, facets, maxResults, userId) {
           $options: "i"
         } }
       ] }
-    ]};
+    ] };
   if (Reaction.hasPermission("orders", userId)) {
     orderResults = OrderSearch.find(findTerm, { limit: maxResults });
     Logger.debug(`Found ${orderResults.count()} orders searching for ${searchTerm}`);
@@ -105,8 +105,8 @@ getResults.accounts = function (searchTerm, facets, maxResults, userId) {
   if (Reaction.hasPermission("reaction-accounts", userId)) {
     const findTerm = {
       $and: [
-        {shopId: shopId},
-        {$or: [
+        { shopId },
+        { $or: [
           { emails: {
             $regex: searchTerm,
             $options: "i"
@@ -124,7 +124,7 @@ getResults.accounts = function (searchTerm, facets, maxResults, userId) {
             $options: "i"
           } }
         ] }
-      ]};
+      ] };
     accountResults = AccountSearch.find(findTerm, {
       limit: maxResults
     });
