@@ -1,0 +1,76 @@
+<template name="getStarted">
+  <style>
+    /*!
+ * bootstrap-vertical-tabs - v1.1.0
+ * https://dbtek.github.io/bootstrap-vertical-tabs
+ * 2014-06-06
+ * Copyright (c) 2014 Ä°smail Demirbilek
+ * License: MIT
+ */
+    .tab-body{
+      margin-left: 50px;
+    }
+    .tabs-left {
+      border-bottom: none;
+      padding-top: 2px;
+    }
+    .tabs-left {
+      border-right: 1px solid #ddd;
+    }
+    .tabs-left>li {
+      float: none;
+      margin-bottom: 2px;
+    }
+    .tabs-left>li {
+      margin-right: -1px;
+    }
+    .tabs-left>li.active>a,
+    .tabs-left>li.active>a:hover,
+    .tabs-left>li.active>a:focus {
+      border-bottom-color: #ddd;
+      border-right-color: transparent;
+    }
+
+    .tabs-left>li>a {
+      border-radius: 4px 0 0 4px;
+      margin-right: 0;
+      display:block;
+    }
+  </style>
+  <div class="row tab-body" style="min-height:300px;">
+    <div  class="col-sm-12">
+      <h3>Getting Started with Reaction Commerce</h3>
+      <hr/>
+      <div class="col-xs-3">
+        <!-- required for floating -->
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs tabs-left">
+          <li class="active"><a href="#introduction" data-toggle="tab">Introduction</a></li>
+          <li><a href="#home" data-toggle="tab">Set up your shop</a></li>
+          <li><a href="#profile" data-toggle="tab">Add addresses</a></li>
+          <li><a href="#messages" data-toggle="tab">Set up payment method</a></li>
+          <li><a href="#settings" data-toggle="tab">Set up social login</a></li>
+        </ul>
+      </div>
+      <div class="col-xs-9">
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane active" id="introduction">
+            Introduction
+            <div class="row">
+              <div class="col-lg-offset-3 col-lg-6">
+                <img class="img img-responsive" src="/johadi_andela.jpg"/>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="home">Home Tab.</div>
+          <div class="tab-pane" id="profile">Profile Tab.</div>
+          <div class="tab-pane" id="messages">Messages Tab.</div>
+          <div class="tab-pane" id="settings">Settings Tab.</div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</template>

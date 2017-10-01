@@ -1,0 +1,1 @@
+import "./templates/getStarted.html";
