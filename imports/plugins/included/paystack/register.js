@@ -1,5 +1,4 @@
 import { Reaction } from "/server/api";
-require("dotenv").config();
 
 Reaction.registerPackage({
   label: "PaystackPayment",
@@ -8,14 +7,15 @@ Reaction.registerPackage({
   autoEnable: true,
   settings: {
     mode: true,
-    publicKey: "pk_test_3e07adc39d17fdb204c221ed2b2319ed6267d4df"
+    publicKey: "",
+    secretKey: ""
   },
   registry: [
     // Dashboard card
     {
       provides: "dashboard",
-      label: "Paystack Payment",
-      description: "Paystack payment provider",
+      label: "Paystack",
+      description: "Pay with paystack",
       icon: "fa fa-credit-card-alt",
       priority: 3,
       container: "paymentMethod"
