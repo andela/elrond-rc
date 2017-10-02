@@ -94,12 +94,4 @@ practicalmeteor:sinon
 
 
 # Custom Packages
-<<<<<<< HEAD
 themeteorchef:commonmark
-=======
-facebook-config-ui
-google-config-ui
-twitter-config-ui
-dynamic-import
-abernix:standard-minifier-js
->>>>>>> 7436ce33eb7eb9ddfa9d598452d71d4c5ccd38d5
