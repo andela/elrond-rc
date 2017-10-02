@@ -42,7 +42,7 @@ Template.staticPageManagement.events({
     const slug = $("#static-page-slug").val();
     const shopId = Reaction.shopId;
     const pageOwner = Meteor.user()._id;
-    const content = simplemde.value();
+    const content = $("#editormd").val() || simplemde.value();
     const createdAt = new Date();
     Meteor.call("insertPage", title, slug, content, shopId, pageOwner,  createdAt, function (err) {
       if (err) {

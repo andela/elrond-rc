@@ -13,7 +13,7 @@ Meteor.methods({
    * @param{String} shopId - the ShopId of the page
    * @param{String} pageOwner of the page
    * @param{String} createdAt, the date of creation of the page
-   * @return {void} there is no return
+   * @return {no-return} there is no return
    */
   insertPage: function (title, slug, content, shopId, pageOwner, createdAt) {
     check(title, String);
@@ -68,7 +68,7 @@ Meteor.methods({
   /**
    * @summary - Deletes a Static Page
    * @param{String} _id - The id of the page
-   * @return{void} No return value
+   * @return{no-return} No return value
    */
   "deletePage"(_id) {
     check(_id, String);
