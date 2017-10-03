@@ -24,7 +24,6 @@ export default () => {
         getAll: {
           authRequired,
           action() {
-            console.log("this.user =====>", this.user);
             const allRecords = Collection.find().fetch();
             return {
               statusCode: 200,
