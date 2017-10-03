@@ -179,6 +179,7 @@ const adminTourSteps = [
   },
   {
     intro: `<h2>Products</h2>
+    element: ".product-grid-list",    
     <hr>
     <div class="tourcontainer">
       All available products would be displayed here. Just browse through.<br>
