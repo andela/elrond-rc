@@ -19,6 +19,7 @@ npm-debug.log
 pids
 results
 allure-results
+package-lock.json
 
 client/plugins.js
 server/plugins.js
