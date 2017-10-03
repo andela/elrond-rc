@@ -2,6 +2,7 @@ import _ from "lodash";
 import React from "react";
 import { DataType } from "react-taco-table";
 import { Template } from "meteor/templating";
+import { Session } from "meteor/session";
 import { i18next } from "/client/api";
 import { ProductSearch, Tags, OrderSearch, AccountSearch } from "/lib/collections";
 import { IconButton, SortableTable } from "/imports/plugins/core/ui/client/components";
@@ -30,6 +31,25 @@ Template.searchModal.onCreated(function () {
     tagSearchResults: []
   });
 
+  /**
+   * Filter Products by price...
+   */
+  const filterPrice = (products, filterQuery) => {
+    return _.filter(products, (item) => {
+      if (item.price) {
+        const itemMaxPrice = parseFloat(item.price.max);
+        const itemMinPrice = parseFloat(item.price.min);
+        console.log(itemMaxPrice, itemMinPrice);
+        const searchMaxPrice = parseFloat(filterQuery[1]);
+        const searchMinPrice = parseFloat(filterQuery[0]);
+        if (itemMinPrice >= searchMinPrice && itemMaxPrice <= searchMaxPrice){
+          return item;
+        }
+        return false;
+      }
+    });
+  };
+
 
   // Allow modal to be closed by clicking ESC
   // Must be done in Template.searchModal.onCreated and not in Template.searchModal.events
@@ -48,14 +68,19 @@ Template.searchModal.onCreated(function () {
     const searchCollection = this.state.get("searchCollection") || "products";
     const searchQuery = this.state.get("searchQuery");
     const facets = this.state.get("facets") || [];
+    const searchedPrices = Session.get("filterPrice");
     const sub = this.subscribe("SearchResults", searchCollection, searchQuery, facets);
-
+ console.log(searchedPrices);
     if (sub.ready()) {
       /*
        * Product Search
        */
       if (searchCollection === "products") {
-        const productResults = ProductSearch.find().fetch();
+        let productResults = ProductSearch.find().fetch();
+        if (!["null", "all"].includes(searchedPrices) && searchedPrices) {
+          const priceRange = searchedPrices.split("-");
+          productResults = filterPrice(productResults, priceRange);
+        }
         const productResultsCount = productResults.length;
         this.state.set("productSearchResults", productResults);
         this.state.set("productSearchCount", productResultsCount);
@@ -165,6 +190,7 @@ Template.searchModal.events({
       $(".search-modal-header").addClass("active-search");
     }
   },
+
   "click [data-event-action=filter]": function (event, templateInstance) {
     event.preventDefault();
     const instance = Template.instance();

@@ -21,3 +21,6 @@ import "./templates/orderSearch/orderResults.js";
 // Account Search
 import "./templates/accountSearch/accountResults.html";
 import "./templates/accountSearch/accountResults.js";
+
+// Filter Search Results
+import "./templates/searchModal/filterSearch.html";
