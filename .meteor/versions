@@ -128,6 +128,7 @@ oauth2@1.1.11
 observe-sequence@1.0.14
 ongoworks:security@2.0.1
 ordered-dict@1.0.9
+pauldowman:dotenv@1.0.1
 percolate:migrations@0.9.8
 practicalmeteor:chai@2.1.0_1
 practicalmeteor:mocha-core@1.0.1
@@ -165,3 +166,4 @@ url@1.0.11
 vsivsi:job-collection@1.4.0
 webapp@1.3.12
 webapp-hashing@1.0.9
+yuukan:streamy@1.4.0
