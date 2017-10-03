@@ -93,6 +93,7 @@ practicalmeteor:sinon
 
 
 # Custom Packages
+themeteorchef:commonmark
 facebook-config-ui
 google-config-ui
 twitter-config-ui

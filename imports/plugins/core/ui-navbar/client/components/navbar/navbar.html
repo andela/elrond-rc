@@ -9,8 +9,9 @@
     <div class="tour card-1">{{> React TourButtonComponent}}</div>
     <div class="search">{{> React IconButtonComponent}}</div>
     <div class="languages hidden-xs">{{> i18nChooser}}</div>
-    <div class="accounts">{{> accounts tpl="loginDropdown"}}</div>
-    <div class="cart card-1">{{> cartIcon}}</div>
+    <div class="accounts">{{> accounts tpl="staticPagesNav"}}</div>
+    <div class="accounts" id="accounts">{{> accounts tpl="loginDropdown"}}</div>
+    <div class="cart">{{> cartIcon}}</div>
     <div class="cart-alert">{{> cartPanel}}</div>
   </div>
 </template>
