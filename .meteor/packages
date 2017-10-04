@@ -99,4 +99,6 @@ google-config-ui
 twitter-config-ui
 dynamic-import
 abernix:standard-minifier-js
+yuukan:streamy
+pauldowman:dotenv
 kadira:flow-router-ssr
