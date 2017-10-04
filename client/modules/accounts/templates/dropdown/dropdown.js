@@ -87,7 +87,6 @@ Template.accountsDropdownApps.onRendered(function () {
     // Display getting started for the admin or shop owner
     $("#onboarding").removeClass("onboarding");
   }
-  console.log(Reaction.hasAdminAccess());
 });
 Template.accountsDropdownApps.events({
   "click #dropdown-apps-onboarding": function (event) {
