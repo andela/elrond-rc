@@ -68,6 +68,14 @@ const unregisteredBuyerTour = [
     </div>`
   },
   {
+    element: ".more",
+    intro: `<h2>Static Pages Options</h2>
+    <hr>
+    <div class="tourcontainer">
+      CLick here to view other pages such as contact pages and about us
+    </div>`
+  },
+  {
     element: ".accounts",
     intro: `<h2>Account Options</h2>
     <hr>
@@ -149,6 +157,14 @@ const registeredBuyerTour = [
     </div>`
   },
   {
+    element: ".more",
+    intro: `<h2>Static Pages Options</h2>
+    <hr>
+    <div class="tourcontainer">
+      CLick here to view other pages such as contact pages and about us
+    </div>`
+  },
+  {
     element: ".accounts",
     intro: `<h2>Account Options</h2>
     <hr>
@@ -178,8 +194,8 @@ const adminTourSteps = [
     </div>`
   },
   {
-    intro: `<h2>Products</h2>
     element: ".product-grid-list",    
+    intro: `<h2>Products</h2>
     <hr>
     <div class="tourcontainer">
       All available products would be displayed here. Just browse through.<br>
@@ -234,6 +250,15 @@ const adminTourSteps = [
       Language should never be a barrier. <br> We understand that the earth is a global village, where everyone
       is connected and we aim to provide our services to everyone around the world regardless of their language.<br>
       Just click on language icon and select you preferred language from the dropdown.
+    </div>`
+  },
+  {
+    element: ".more",
+    intro: `<h2>Static Pages Options</h2>
+    <hr>
+    <div class="tourcontainer">
+      As an admin cLick here to view other pages such as contact pages and about us.
+      Admin also has the option to add more static pages.
     </div>`
   },
   {

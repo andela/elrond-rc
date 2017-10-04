@@ -64,7 +64,9 @@
        -o-transition: opacity 0.1s ease-out;
           transition: opacity 0.1s ease-out;
 }
-
+.introjs-helperLayer{
+  background-color: transparent;
+}
 .rui.navbar .rui.tagnav {
   background: transparent;
 }
@@ -273,5 +275,21 @@
 }
 
 .rui.navbar .tour:hover button {
+  outline: none;
+}
+.rui.navbar .more {
+  .display(flex);
+  .align-items(center);
+  .flex(0 0 auto);
+  height: @navbar-height;
+  padding: 0px @navbar-padding-vertical;
+  cursor: pointer;
+}
+.rui.navbar .more:hover {
+  background-color: @navbar-default-toggle-icon-bar-bg;
+  border-color: @navbar-default-toggle-border-color;
+}
+
+.rui.navbar .more:hover button {
   outline: none;
 }
