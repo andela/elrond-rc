@@ -12,15 +12,16 @@ import "./templates/productSearch/productSearchTags.html";
 import "./templates/productSearch/productItem.html";
 import "./templates/productSearch/productItem.js";
 import "./templates/productSearch/content.html";
-import "./templates/productSearch/content.js";
+import "./templates/productSearch/content";
 
 // Order Search
 import "./templates/orderSearch/orderResults.html";
-import "./templates/orderSearch/orderResults.js";
+import "./templates/orderSearch/orderResults";
 
 // Account Search
 import "./templates/accountSearch/accountResults.html";
-import "./templates/accountSearch/accountResults.js";
+import "./templates/accountSearch/accountResults";
 
 // Filter Search Results
 import "./templates/searchModal/filterSearch.html";
+import "./templates/searchModal/filterSearch";

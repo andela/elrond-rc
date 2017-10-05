@@ -9,8 +9,17 @@ Template.filterSearch.helpers({
 });
 
 Template.filterSearch.events({
-  "change #filterBySearch": function (event) {
-    Session.set("filterPrice", event.target.value);
-    console.log("I never ready abeg!", event.target.value); // eslint-disable-line
+  "change #price-filter": function (event) {
+    // console.log(event.target.value);
+    Session.set("priceFilter", event.target.value);
+  },
+  "change #brand-filter": function (event) {
+    Session.set("brandFilter", event.target.value);
+  }
+});
+
+Template.sortRelevance.events({
+  "change #sort-value": function (event) {
+    Session.set("sortValue", event.target.value);
   }
 });

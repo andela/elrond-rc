@@ -31,25 +31,6 @@ Template.searchModal.onCreated(function () {
     tagSearchResults: []
   });
 
-  /**
-   * Filter Products by price...
-   */
-  const filterPrice = (products, filterQuery) => {
-    return _.filter(products, (item) => {
-      if (item.price) {
-        const itemMaxPrice = parseFloat(item.price.max);
-        const itemMinPrice = parseFloat(item.price.min);
-        console.log(itemMaxPrice, itemMinPrice);
-        const searchMaxPrice = parseFloat(filterQuery[1]);
-        const searchMinPrice = parseFloat(filterQuery[0]);
-        if (itemMinPrice >= searchMinPrice && itemMaxPrice <= searchMaxPrice){
-          return item;
-        }
-        return false;
-      }
-    });
-  };
-
 
   // Allow modal to be closed by clicking ESC
   // Must be done in Template.searchModal.onCreated and not in Template.searchModal.events
@@ -63,24 +44,72 @@ Template.searchModal.onCreated(function () {
     }
   });
 
+  // Filter products by price
+  const priceFilter = (products, query) => {
+    return _.filter(products, (product) => {
+      if (product.price) {
+        const productMaxPrice = parseFloat(product.price.max);
+        const productMinPrice = parseFloat(product.price.min);
+        const queryMaxPrice = parseFloat(query[1]);
+        const queryMinPrice = parseFloat(query[0]);
+        if (productMinPrice >= queryMinPrice && productMaxPrice <= queryMaxPrice) {
+          return product;
+        }
+        return false;
+      }
+    });
+  };
+  // Sort products by price
+  const sort = (products, type) => {
+    return products.sort((a, b) => {
+      const A = a.price === null ? -1 : a.price.min;
+      const B = b.price === null ? -1 : b.price.min;
+      if (A < B) {
+        return type === "DESC" ? 1 : -1;
+      } else if (A > B) {
+        return type === "ASC" ? 1 : -1;
+      }
+      return 0;
+    });
+  };
+
+  // Filter products by brand
+  function brandFilter(products, query) {
+    return _.filter(products, (product) => {
+      return product.vendor === query;
+    });
+  }
 
   this.autorun(() => {
     const searchCollection = this.state.get("searchCollection") || "products";
     const searchQuery = this.state.get("searchQuery");
+    const priceQuery = Session.get("priceFilter");
+    const brandQuery = Session.get("brandFilter");
+    const sortQuery = Session.get("sortValue");
     const facets = this.state.get("facets") || [];
-    const searchedPrices = Session.get("filterPrice");
     const sub = this.subscribe("SearchResults", searchCollection, searchQuery, facets);
- console.log(searchedPrices);
+
+    // console.log(priceQuery);
     if (sub.ready()) {
       /*
        * Product Search
        */
       if (searchCollection === "products") {
         let productResults = ProductSearch.find().fetch();
-        if (!["null", "all"].includes(searchedPrices) && searchedPrices) {
-          const priceRange = searchedPrices.split("-");
-          productResults = filterPrice(productResults, priceRange);
+        console.log(productResults);
+        if (!["null", "all"].includes(priceQuery) && priceQuery) {
+          const range = priceQuery.split("-");
+          // console.log(range);
+          productResults = priceFilter(productResults, range);
+          // console.log(productResults);
         }
+        if (!["null", "all"].includes(brandQuery) && brandQuery) {
+          productResults = brandFilter(productResults, brandQuery);
+        }
+        if (sortQuery !== "null" && sortQuery) {
+          productResults = sort(productResults, sortQuery);
+        }
+
         const productResultsCount = productResults.length;
         this.state.set("productSearchResults", productResults);
         this.state.set("productSearchCount", productResultsCount);
@@ -172,6 +201,11 @@ Template.searchModal.helpers({
   },
   showSearchResults() {
     return false;
+  },
+  hasResults() {
+    const instance = Template.instance();
+    const sortResults = instance.state.get("productSearchResults").length;
+    return sortResults > 0;
   }
 });
 
@@ -190,7 +224,6 @@ Template.searchModal.events({
       $(".search-modal-header").addClass("active-search");
     }
   },
-
   "click [data-event-action=filter]": function (event, templateInstance) {
     event.preventDefault();
     const instance = Template.instance();
@@ -209,6 +242,10 @@ Template.searchModal.events({
     $(".js-search-modal").delay(400).fadeOut(400, () => {
       Blaze.remove(view);
     });
+  },
+  "click [data-event-action=filterClick]": function () {
+    $("#filterSearch").toggleClass("hidden");
+    $("#toggleTags").toggleClass("hidden");
   },
   "click [data-event-action=clearSearch]": function (event, templateInstance) {
     $("#search-input").val("");
