@@ -7,7 +7,13 @@
   border-radius: 0;
   border: 0;
 }
-
+.rui.navbar .card-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.rui.navbar .card-1:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
 .rui.navbar a,
 .rui.navbar a:hover,
 .rui.navbar a:focus,
@@ -37,7 +43,30 @@
   .flex(1 1 auto);
   margin: 0 10px;
 }
+.tourcontainer {
+  line-height: 20px;
+  font-family: inherit;
+}
 
+.introjs-tooltip {
+  box-sizing: content-box;
+  position: absolute;
+  visibility: visible;
+  padding: 10px;
+  background-color: white;
+  min-width: 300px !important;
+  max-width: 300px !important;
+  border-radius: 3px;
+  box-shadow: 0 1px 10px rgba(0,0,0,.4);
+  -webkit-transition: opacity 0.1s ease-out;
+     -moz-transition: opacity 0.1s ease-out;
+      -ms-transition: opacity 0.1s ease-out;
+       -o-transition: opacity 0.1s ease-out;
+          transition: opacity 0.1s ease-out;
+}
+.introjs-helperLayer{
+  background-color: transparent;
+}
 .rui.navbar .rui.tagnav {
   background: transparent;
 }
@@ -230,5 +259,37 @@
 }
 
 .rui.navbar .search:hover button {
+  outline: none;
+}
+.rui.navbar .tour {
+  .display(flex);
+  .align-items(center);
+  .flex(0 0 auto);
+  height: @navbar-height;
+  padding: 0px @navbar-padding-vertical;
+  cursor: pointer;
+}
+.rui.navbar .tour:hover {
+  background-color: @navbar-default-toggle-icon-bar-bg;
+  border-color: @navbar-default-toggle-border-color;
+}
+
+.rui.navbar .tour:hover button {
+  outline: none;
+}
+.rui.navbar .more {
+  .display(flex);
+  .align-items(center);
+  .flex(0 0 auto);
+  height: @navbar-height;
+  padding: 0px @navbar-padding-vertical;
+  cursor: pointer;
+}
+.rui.navbar .more:hover {
+  background-color: @navbar-default-toggle-icon-bar-bg;
+  border-color: @navbar-default-toggle-border-color;
+}
+
+.rui.navbar .more:hover button {
   outline: none;
 }
