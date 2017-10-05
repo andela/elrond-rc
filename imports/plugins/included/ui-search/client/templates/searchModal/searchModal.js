@@ -53,7 +53,7 @@ Template.searchModal.onCreated(function () {
         const queryMaxPrice = parseFloat(query[1]);
         const queryMinPrice = parseFloat(query[0]);
         if (productMinPrice >= queryMinPrice && productMaxPrice <= queryMaxPrice) {
-          return product;
+          return true;
         }
         return false;
       }
@@ -74,9 +74,9 @@ Template.searchModal.onCreated(function () {
   };
 
   // Filter products by brand
-  function brandFilter(products, query) {
+  function brandFilter(products, vendors) {
     return _.filter(products, (product) => {
-      return product.vendor === query;
+      return product.vendor === vendors;
     });
   }
 
