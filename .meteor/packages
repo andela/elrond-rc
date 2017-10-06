@@ -102,3 +102,4 @@ abernix:standard-minifier-js
 yuukan:streamy
 pauldowman:dotenv
 kadira:flow-router-ssr
+barbatus:stars-rating@=1.1.1
