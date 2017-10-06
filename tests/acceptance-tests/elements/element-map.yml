@@ -2,6 +2,7 @@ login_dropdown_btn: "[data-event-action='accounts-dropdown-click']"
 login_email_fld: "[class='form-control login-input-email']"
 login_pw_fld: "[class='form-control login-input-password']"
 login_btn: "[data-event-action='submitSignInForm']"
+admin_dropdown_menu: "[class='dropdown-menu']"
 
 #account profile
 pl_email_address_fld: "//div[2]/div/div/div/form/div/input"
