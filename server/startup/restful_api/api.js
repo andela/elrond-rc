@@ -164,10 +164,6 @@ export default () => {
             }
           }
         }
-
-        // patch: {
-        //   // TODO: write the patch action() method
-        // }
       }
     };
   };
