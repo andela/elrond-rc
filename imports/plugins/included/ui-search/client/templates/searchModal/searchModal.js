@@ -83,8 +83,8 @@ Template.searchModal.onCreated(function () {
   this.autorun(() => {
     const searchCollection = this.state.get("searchCollection") || "products";
     const searchQuery = this.state.get("searchQuery");
-    const priceQuery = Session.get("priceFilter");
-    const brandQuery = Session.get("brandFilter");
+    const priceQuery = Session.get("filterPrice");
+    const brandQuery = Session.get("filterVendor");
     const sortQuery = Session.get("sortValue");
     const facets = this.state.get("facets") || [];
     const sub = this.subscribe("SearchResults", searchCollection, searchQuery, facets);
@@ -96,17 +96,17 @@ Template.searchModal.onCreated(function () {
        */
       if (searchCollection === "products") {
         let productResults = ProductSearch.find().fetch();
-        console.log(productResults);
+        // console.log(productResults);
         if (!["null", "all"].includes(priceQuery) && priceQuery) {
           const range = priceQuery.split("-");
           // console.log(range);
           productResults = priceFilter(productResults, range);
-          // console.log(productResults);
         }
         if (!["null", "all"].includes(brandQuery) && brandQuery) {
           productResults = brandFilter(productResults, brandQuery);
         }
         if (sortQuery !== "null" && sortQuery) {
+          console.log(sortQuery);
           productResults = sort(productResults, sortQuery);
         }
 
