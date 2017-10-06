@@ -2,8 +2,8 @@ admin_user: Admin
 admin_email: v8aecggj@localhost
 admin_pw: oaqdXNIJ
 
-guest_email: "guest@reactioncommerce.com"
-guest_pw: password123
+guest_email: mike@email.com
+guest_pw: 123456
 
 # shop address
 country: US
