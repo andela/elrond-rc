@@ -3,8 +3,7 @@ import { Template } from "meteor/templating";
 import _ from "underscore";
 
 Template.filterSearch.helpers({
-  getBrands(products) {
-    // console.log(products)
+  getVendors(products) {
     return _.uniq(_.pluck(products, "vendor"));
   }
 });
@@ -16,12 +15,20 @@ Template.filterSearch.events({
   },
   "change #vendor-filter": function (event) {
     Session.set("filterVendor", event.target.value);
+  },
+  "change #sortByLatest": function (event) {
+    Session.set("sortByLatest", event.target.value);
   }
 });
+// Template.sortByLatest.events({
+//   "change #sortByLatest": function (event) {
+//     Session.set("sortByLatest", event.target.value);
+//   }
+// });
 
 Template.sortRelevance.events({
   "change #sortRelevance": function (event) {
-    // console.log(event.target.value, 'hello world')
+    // console.log(event.target.value, 'sort Value');
     Session.set("sortValue", event.target.value);
   }
 });
