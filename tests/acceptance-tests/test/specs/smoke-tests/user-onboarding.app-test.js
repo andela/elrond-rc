@@ -58,5 +58,8 @@ describe("simple login test", function () {
     browser.click("#email-li a");
     browser.waitForVisible("#email");
     browser.pause("4000");
+    browser.click("#product-li a");
+    browser.waitForVisible("#product");
+    browser.pause("4000");
   });
 });
