@@ -26,7 +26,7 @@
                <option value="null" selected disabled>Filter by vendor</option>
                <option value="all">All vendors</option>
                 {{#each vendor in getVendors productSearchResults }}
-               <option value="{{vendor}}">{{vendor}}</option>
+               <option id ="{{vendor}}" value="{{vendor}}">{{vendor}}</option>
                {{/each}}
              </select>
           </div>
