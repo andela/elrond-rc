@@ -1,9 +1,9 @@
-admin_user: Administrator
-admin_email: testing@reactioncommerce.com
-admin_pw: password123
+admin_user: Admin
+admin_email: ggmjdkct@localhost
+admin_pw: iLxOqkar
 
-guest_email: "guest@reactioncommerce.com"
-guest_pw: password123
+guest_email: mike@email.com
+guest_pw: 123456
 
 # shop address
 country: US
