@@ -75,7 +75,6 @@ Template.loginDropdown.events({
    */
   "click #wallet": (event) => {
     event.preventDefault();
-    // Reaction.Router.go("/wallet");
     FlowRouter.go("/wallet");
   }
 });
