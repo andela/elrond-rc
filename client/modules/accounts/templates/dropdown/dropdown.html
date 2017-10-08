@@ -35,6 +35,7 @@
   <ul class="user-accounts-dropdown-apps">
     {{> userAccountsDropdown}}
     <!--administrative shortcut icons -->
+    {{> walletMenu}}
     {{#each reactionApps provides="shortcut" enabled=true}}
       <li class="dropdown-apps-icon">
         <a href={{pathFor name}} id="dropdown-apps-{{name}}" title="{{label}}">
@@ -46,6 +47,17 @@
       </li>
     {{/each}}
   </ul>
+</template>
+
+<template name="walletMenu">
+  <li id="wallet" class="dropdown-apps-icon">
+    <a href={{pathFor 'wallet'}} title="wallet">
+        <i class="fa fa-credit-card"></i>
+          <span class="icon-text">
+            Wallet
+          </span>
+      </a>
+  </li>
 </template>
 
 <template name="userAccountsDropdown">

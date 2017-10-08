@@ -67,5 +67,15 @@ Template.loginDropdown.events({
       Reaction.Router.go(route);
     }
     template.$(".dropdown-toggle").dropdown("toggle");
+  },
+  /**
+   * Wallet
+   * @param  {Event} event - jQuery Event
+   * @return {void}
+   */
+  "click #wallet": (event) => {
+    event.preventDefault();
+    // Reaction.Router.go("/wallet");
+    FlowRouter.go("/wallet");
   }
 });
