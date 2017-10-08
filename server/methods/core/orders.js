@@ -5,15 +5,106 @@ import accounting from "accounting-js";
 import Future from "fibers/future";
 import { Meteor } from "meteor/meteor";
 import { check } from "meteor/check";
+import { Streamy } from "meteor/yuukan:streamy";
 import { getSlug } from "/lib/api";
 import { Cart, Media, Orders, Products, Shops } from "/lib/collections";
 import * as Schemas from "/lib/collections/schemas";
 import { Logger, Reaction } from "/server/api";
+import jusibe from "jusibe";
+import nodemailer from "nodemailer";
 
 /**
  * Reaction Order Methods
  */
 Meteor.methods({
+
+  /**
+   * orders/sendMail
+   * @summary To notify sellers and users of order's movement via mail
+   * @param {Object} payload - details of the order
+   * @returns {void} returns workflow update result
+   */
+
+  "orders/sendEmail": (payload) => {
+    check(payload, Object);
+    const mailHead = `
+      <table style='border: 1px solid black; text-align:center; width: 100%'>
+        <tr>
+          <thead>
+            <td colspan='2' style='background: gray; color: white; font-family: tahoma;'>
+              <h3>Reaction</h3>
+            </td>
+          </thead>
+        </tr>
+        <tbody>
+          <tr>
+            <td> Name </td>
+            <td> ${payload.dataForOrderEmail.order.items[0].title} </td>
+          </tr>
+          <tr>
+            <td> Status </td>
+            <td> ${payload.message} </td>
+          </tr>
+          <tr>
+            <td> Quantity </td>
+            <td> ${payload.dataForOrderEmail.order.items[0].quantity} </td>
+          </tr>
+          <tr>
+            <td> Price </td>
+            <td> ${payload.dataForOrderEmail.billing.total} </td>
+          </tr>
+          <tr>
+            <td> Image </td>
+            <td> ${payload.dataForOrderEmail.order.items[0].placeholderImage} </td>
+          </tr>
+          <tr>
+            <td> Order Date </td>
+            <td> ${payload.dataForOrderEmail.orderDate} </td>
+          </tr>
+          <tr>
+            <td colspan='2'>
+              <a href='${payload.dataForOrderEmail.homepage}'>
+                Ⓒ ${payload.dataForOrderEmail.copyrightDate} Reaction
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>`;
+
+    const mailOptions = {
+      from: '"Reaction Commerce" <enlrondrc29@gmail.com>',
+      to: payload.dataForOrderEmail.order.email,
+      subject: "New Order Placed",
+      html: mailHead
+    };
+
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASSWORD
+      }
+    });
+
+    transporter.sendMail(mailOptions);
+  },
+
+  /**
+   * orders/sendText
+   * @summary notifies seller and user of order's movement via mail
+   * @param {Object} payload - details of the order
+   * @returns {void}
+  */
+  "orders/sendSMS": function (payload) {
+    check(payload, Object);
+    const key = process.env.PUBLIC_KEY;
+    const token = process.env.ACCESS_TOKEN;
+    const Jusibe = new jusibe(key, token);
+    Jusibe.sendSMS(payload);
+  },
+
   /**
    * orders/shipmentTracking
    * @summary wraps addTracking and triggers workflow update
@@ -22,28 +113,7 @@ Meteor.methods({
    * @returns {String} returns workflow update result
    */
   "orders/shipmentTracking": function (order, tracking) {
-    check(order, Object);
-    check(tracking, String);
-
-    if (!Reaction.hasPermission("orders")) {
-      throw new Meteor.Error(403, "Access Denied");
-    }
-
-    this.unblock();
-    const orderId = order._id;
-
-    Meteor.call("orders/addTracking", orderId, tracking);
-    Meteor.call("orders/updateHistory", orderId, "Tracking Added",
-      tracking);
-    Meteor.call("workflow/pushOrderWorkflow", "coreOrderWorkflow",
-      "coreShipmentTracking", order._id);
-
-    // Set the status of the items as shipped
-    const itemIds = template.order.shipping[0].items.map((item) => {
-      return item._id;
-    });
-
-    Meteor.call("workflow/pushItemWorkflow", "coreOrderItemWorkflow/tracking", order._id, itemIds);
+    // Meteor.call("orders/sendSMS", "orders/SendEmail");
   },
 
   // shipmentPrepare
@@ -53,7 +123,8 @@ Meteor.methods({
 
     if (order) {
       return Meteor.call("workflow/pushOrderWorkflow",
-        "coreOrderWorkflow", "coreOrderDocuments", order._id);
+        "coreOrderWorkflow", "coreOrderDocuments", order._id
+      );
     }
   },
 
@@ -204,8 +275,15 @@ Meteor.methods({
         });
 
         Meteor.call("workflow/pushItemWorkflow", "coreOrderItemWorkflow/captured", order, itemIds);
-
-
+        if (order.email) {
+          Meteor.call("orders/sendNotification", order, (err) => {
+            if (err) {
+              Logger.error(err, "orders/shipmentShipped: Failed to send notification");
+            }
+          });
+        } else {
+          Logger.warn("No order email found. No notification sent.");
+        }
         return this.processPayment(order);
       }
     });
@@ -434,11 +512,34 @@ Meteor.methods({
     Reaction.Email.send({
       to: order.email,
       from: `${shop.name} <${shop.emails[0].address}>`,
-      subject: `Your order is confirmed`,
-      // subject: `Order update from ${shop.name}`,
+      subject: "Your order is confirmed",
       html: SSR.render(tpl,  dataForOrderEmail)
     });
 
+    const message = {
+      "new": "Hi, your order has been created. Thank you.",
+      "coreOrderWorkflow/processing": "Hi, your payment is approved, and you goods has been shipped. Thank you",
+      "coreOrderWorkflow/completed": "Hey!, your order has been shipped",
+      "coreorderWorkflow/canceled": "Sorry, your order is cancelled",
+      "success": "SMS SENT"
+    };
+    const textPayload = {
+      to: order.billing[0].address.phone,
+      from: "Reaction Commerce",
+      message: message[order.workflow.status]
+    };
+    const mailPayload = {
+      to: order.email,
+      from: "Reaction Commerce", dataForOrderEmail,
+      message: message[order.workflow.status],
+      email: order.email
+    };
+
+    Meteor.call("orders/sendSMS", textPayload);
+    Meteor.call("orders/sendEmail", mailPayload);
+    if (order.workflow.status === "new") {
+      Streamy.broadcast("new order", { data: "There is a new order" });
+    }
     return true;
   },
 
@@ -619,7 +720,7 @@ Meteor.methods({
       throw new Meteor.Error(403, "Access Denied. You are not connected.");
     }
 
-    return Orders.update({cartId: cartId}, {
+    return Orders.update({ cartId: cartId }, {
       $set: {
         email: email
       }
@@ -695,7 +796,7 @@ Meteor.methods({
     }
 
     const order = Orders.findOne(orderId);
-    order.items.forEach(item => {
+    order.items.forEach((item) => {
       Products.update({
         _id: item.variants._id
       }, {

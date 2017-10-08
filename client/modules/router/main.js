@@ -181,14 +181,21 @@ Router.initPackageRoutes = () => {
         ReactionLayout(Session.get("INDEX_OPTIONS") || {});
       }
     });
-
     shop.route("/wallet", {
       name: "wallet",
       action() {
         ReactionLayout({ template: "wallet" });
       }
     });
-
+    // Static Pages View Route
+    Router.route("/pages/:slug", {
+      action(params) {
+        ReactionLayout({
+          template: "staticPageView",
+          slug: params.slug
+        });
+      }
+    });
     // get package registry route configurations
     for (const pkg of pkgs) {
       const newRoutes = [];
