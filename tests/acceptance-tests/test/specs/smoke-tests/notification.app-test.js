@@ -1,5 +1,4 @@
 "use strict";
-
 const yaml = require("js-yaml");
 const fs = require("fs");
 const expect = require("chai").expect;
