@@ -46,7 +46,6 @@ Template.showReviews.helpers({
     const productId = () => Reaction.Router.getParam("handle");
     console.log(productId());
     const productidentification =  Products.findOne(productId()) && Products.findOne(productId())._id;
-    debugger;
     Meteor.subscribe("Reviews");
     return Reviews.find({productId: productidentification}).fetch();
   }
