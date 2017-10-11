@@ -10,7 +10,6 @@ Template.filterSearch.helpers({
 
 Template.filterSearch.events({
   "change #price-filter": function (event) {
-    // console.log(event.target.value);
     Session.set("filterPrice", event.target.value);
   },
   "change #vendor-filter": function (event) {
@@ -20,15 +19,9 @@ Template.filterSearch.events({
     Session.set("sortByLatest", event.target.value);
   }
 });
-// Template.sortByLatest.events({
-//   "change #sortByLatest": function (event) {
-//     Session.set("sortByLatest", event.target.value);
-//   }
-// });
 
 Template.sortRelevance.events({
   "change #sortRelevance": function (event) {
-    // console.log(event.target.value, 'sort Value');
     Session.set("sortValue", event.target.value);
   }
 });
