@@ -63,7 +63,6 @@ juliancwirko:s-alert
 juliancwirko:s-alert-stackslide
 kadira:blaze-layout
 kadira:dochead
-kadira:flow-router-ssr
 matb33:collection-hooks
 meteorhacks:ssr
 meteorhacks:subs-manager
@@ -94,8 +93,13 @@ practicalmeteor:sinon
 
 
 # Custom Packages
+themeteorchef:commonmark
 facebook-config-ui
 google-config-ui
 twitter-config-ui
 dynamic-import
 abernix:standard-minifier-js
+nimble:restivus
+yuukan:streamy
+pauldowman:dotenv
+kadira:flow-router-ssr

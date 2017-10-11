@@ -4,6 +4,7 @@ import { Blaze } from "meteor/blaze";
 import { Template } from "meteor/templating";
 import { Reaction, i18next } from "/client/api";
 import { Packages } from "/lib/collections";
+import { Streamy } from "meteor/yuukan:streamy";
 
 
 Template.coreAdminLayout.onRendered(function () {
@@ -72,6 +73,9 @@ Template.coreAdminLayout.helpers({
     if (props.type === "seperator") {
       return true;
     }
+    Streamy.on("new order", function(d, s) {
+      Alerts.toast("A new Order has being placed", "success");
+    });
     return false;
   },
 
@@ -79,7 +83,7 @@ Template.coreAdminLayout.helpers({
     const routeName = Reaction.Router.getRouteName();
 
     if (routeName !== "dashboard") {
-      const registryItems = Reaction.Apps({provides: "settings", container: routeName});
+      const registryItems = Reaction.Apps({ provides: "settings", container: routeName });
       const buttons = [];
 
       for (const item of registryItems) {
@@ -101,17 +105,16 @@ Template.coreAdminLayout.helpers({
           });
         }
       }
-
       return buttons;
     }
     return [];
   },
 
-  control: function () {
+  control () {
     return Reaction.getActionView();
   },
 
-  adminControlsClassname: function () {
+  adminControlsClassname () {
     if (Reaction.isActionViewOpen()) {
       return "show-settings";
     }
@@ -134,7 +137,7 @@ Template.coreAdminLayout.helpers({
     });
 
     if (reactionApp) {
-      const settingsData = _.find(reactionApp.registry, function (item) {
+      const settingsData = _.find(reactionApp.registry, (item) => {
         return item.route === Reaction.Router.getRouteName() && item.provides === "settings";
       });
 
