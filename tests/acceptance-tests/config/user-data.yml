@@ -1,8 +1,8 @@
 admin_user: Admin
-admin_email: ggmjdkct@localhost
-admin_pw: iLxOqkar
+admin_email: admin@localhost
+admin_pw: password
 
-guest_email: mike@email.com
+guest_email: theozmic@gmail.com
 guest_pw: 123456
 
 # shop address
