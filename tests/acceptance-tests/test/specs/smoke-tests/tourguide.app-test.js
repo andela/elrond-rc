@@ -30,7 +30,7 @@ describe("tour guide test", function () {
     browser.click(eleMap.take_tour_next);
     browser.pause(2000);
     browser.click(eleMap.take_tour_done);
-    browser.pause(2000);    
+    browser.pause(2000);
     expect(browser.getAttribute("a", "introjs-donebutton")).to.exist;
   });
 });

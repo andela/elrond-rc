@@ -2,8 +2,8 @@ admin_user: Admin
 admin_email: admin@localhost
 admin_pw: password
 
-guest_email: theozmic@gmail.com
-guest_pw: 123456
+guest_email: jim.hadi10@gmail.com
+guest_pw: 112233
 
 # shop address
 country: US

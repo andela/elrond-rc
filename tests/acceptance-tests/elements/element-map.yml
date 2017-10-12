@@ -103,3 +103,12 @@ input_description: "[class='{this.props.name}-edit-input']"
 select_product_type: "[id='digital']"
 select_digital: "[class='digital-category']"
 add_product_to_cart: "[class='input-group-addon add-to-cart-text js-add-to-cart']"
+
+# Static page locators
+account_dropdown: "#accounts"
+dashboard_dropdown: "#dropdown-apps-dashboard"
+manage_static_page: "(//h3[@class='title'])[3]"
+created_page: "(//a[@id='About-Page'])"
+delete_page: "[class='btn btn-default deletePage']"
+confirm_delete: "[class='swal2-confirm swal2-styled']"
+home_page: "[class='brand']"
