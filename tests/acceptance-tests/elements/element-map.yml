@@ -100,7 +100,9 @@ thank_you_txt: "h3 > span"
 
 # Static page locators
 account_dropdown: "#accounts"
+analytics: "(//h3[@class='title'])[2]"
 dashboard_dropdown: "#dropdown-apps-dashboard"
+dashboard: "[class='rui font-icon icon-reaction-logo']"
 manage_static_page: "(//h3[@class='title'])[4]"
 created_page: "(//a[@id='About-Page'])"
 delete_page: "[class='btn btn-default deletePage']"
