@@ -48,16 +48,12 @@ function getNumberOfPages() {
 }
 
 function check() {
-  document.getElementById("next").disabled = currentPage === numberOfPages
-    ? true
-    : false;
-  document.getElementById("previous").disabled = currentPage === 1
-    ? true
-    : false;
-  document.getElementById("first").disabled = currentPage === 1 ? true : false;
-  document.getElementById("last").disabled = currentPage === numberOfPages
-    ? true
-    : false;
+  document.getElementById("next").disabled = currentPage === numberOfPages;
+
+  document.getElementById("previous").disabled = currentPage === 1;
+
+  document.getElementById("first").disabled = currentPage === 1;
+  document.getElementById("last").disabled = currentPage === numberOfPages;
 }
 
 function loadList() {
@@ -167,7 +163,6 @@ function handlePayment(result) {
           createdAt: new Date()
         };
         if (type === "deposit") {
-          console.log(paystackResponse.amount, "bleh bleh");
           transactions = {
             amount: paystackResponse.amount / 100,
             referenceId: paystackResponse.reference,
