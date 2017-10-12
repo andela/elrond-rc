@@ -1,21 +1,17 @@
-<template name="productReviews">
-  <div class="container-main">
-    <div class="row show-review">
-      {{rating}}
-      <div id="reviews">
-        <h3>Submit a review</h3>
-        <div>
-          <h5>Rating:</h5>
-          {{> starsRating id='rating' mutable=true size=20}}
-        </div>
-        <div id="comment-box">
-          <h5>Comment:</h5>
-          <textarea id="comment" style="max-width: 350px;" class="form-control" placeholder="Please write your comment here"></textarea>
-          <br>
-          <button type="submit" id="send" class="btn btn-success">Submit Review</button>
-        </div>
+<template name="embedSocial">
+    <div class="container-main">
+      <div class="row">
+      <div class="{{testDisplay.facebook}}">
+        {{#if facebook}}
+        <iframe src={{facebook}} width="500" height="400" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+        {{/if}}
+      </div>
+      <div class="{{testDisplay.twitter}}" style="width: 500px; height: 400px; overflow-y: scroll;">
+        {{#if twitter}}
+        <a class="twitter-timeline" href="https://twitter.com/elrond_rc?ref_src=twsrc%5Etfw">Tweets by elrond_rc</a>
+        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        {{/if}}
+      </div>
       </div>
     </div>
-    <div class="row"></div>
-  </div>
 </template>
