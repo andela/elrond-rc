@@ -122,7 +122,7 @@ describe("Server/Core", function () {
       return done();
     });
   });
-
+  
   xdescribe("shop/locateAddress", function () {
     it("should locate an address based on known US coordinates", function (done) {
       this.timeout(10000);
