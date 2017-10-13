@@ -122,9 +122,7 @@ describe("Server/Core", function () {
       return done();
     });
   });
-
-  // Coordinate cannot be obtained from the test and throws error on CircleCI
-  // Skip this test suite since the coordinate is for US and cannot be obtained in the test
+  
   xdescribe("shop/locateAddress", function () {
     it("should locate an address based on known US coordinates", function (done) {
       this.timeout(10000);
