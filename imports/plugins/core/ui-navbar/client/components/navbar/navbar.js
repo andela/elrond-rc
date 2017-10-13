@@ -45,7 +45,7 @@ Template.CoreNavigationBar.helpers({
     return {
       component: FlatButton,
       kind: "flat",
-      label: "Tour",
+      label: " Tour",
       icon: "fa fa-globe",
       onClick() {
         takeTour();
