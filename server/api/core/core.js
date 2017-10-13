@@ -8,6 +8,7 @@ import ProcessJobs from "/server/jobs";
 import { getRegistryDomain } from "./setDomain";
 import { sendVerificationEmail } from "./accounts";
 import { getMailUrl } from "./email/config";
+require("dotenv").config();
 
 export default {
 
@@ -240,10 +241,10 @@ export default {
     }
 
     // defaults use either env or generated
-    options.email = env.REACTION_EMAIL || Random.id(8).toLowerCase() +
+    options.email = process.env.REACTION_EMAIL || Random.id(8).toLowerCase() +
       "@" + domain;
-    options.username = env.REACTION_USER || "Admin"; // username
-    options.password = env.REACTION_AUTH || Random.secret(8);
+    options.username = process.env.REACTION_USER || "Admin"; // username
+    options.password = process.env.REACTION_AUTH || Random.secret(8);
 
     // but we can override with provided `meteor --settings`
     if (Meteor.settings && !configureEnv) {

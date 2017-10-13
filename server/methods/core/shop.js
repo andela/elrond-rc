@@ -187,7 +187,7 @@ Meteor.methods({
         currency: 1
       }
     });
-    const baseCurrency = shop.currency || "USD";
+    const baseCurrency = shop.currency || "NGN";
     const shopCurrencies = shop.currencies;
 
     // fetch shop settings for api auth credentials

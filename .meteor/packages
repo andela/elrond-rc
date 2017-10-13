@@ -99,8 +99,12 @@ google-config-ui
 twitter-config-ui
 dynamic-import
 abernix:standard-minifier-js
+chart:chart
 nimble:restivus
 yuukan:streamy
 pauldowman:dotenv
 kadira:flow-router-ssr
 barbatus:stars-rating@=1.1.1
+mrt:moment
+richsilv:pikaday
+schiller:twit

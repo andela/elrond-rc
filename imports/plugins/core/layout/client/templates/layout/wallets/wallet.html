@@ -1,0 +1,29 @@
+<template name="wallet">
+  <div class="flex flex-column flex-align-center flex-2x container">
+    <div class="col-sm-12" id="transactions">
+      <h1>Wallet</h1>
+      <h5 style="margin: 20px 0px; color:cornflowerblue; font-weight: bolder;" class="balance" id="balance">Balance: {{formatPrice balance}}</h5>
+      <div class="row">
+          <div class="col-md-4 col-xs-12">
+          <div>Fund Wallet</div>
+          <form id="deposit" class="form-inline">
+            <div class="wallet-action-group">
+              <input id="depositAmount" type="number" class="form-control input-success" placeholder="Amount" required>
+              <button id="fundWallet" class="form-control btn btn-success" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-4 col-xs-12">
+          <div>Transfer Funds</div>
+          <form id="transfer" class="form-inline">
+            <div class="wallet-action-group">
+              <input id="transferAmount" class="form-control" type="number" name="amount" placeholder="Amount" required>
+              <input id="recipient" class="form-control" type="text" name="email" placeholder="Beneficiary Email" required>
+              <button type="submit" style="margin-top:10px" class="form-control btn btn-success">Transfer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

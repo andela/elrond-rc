@@ -48,3 +48,20 @@
     </div>
   </div>
 </template>
+<template name="embedSocial">
+    <div class="container-main">
+      <div class="row">
+      <div class="{{testDisplay.facebook}}">
+        {{#if facebook}}
+        <iframe src={{facebook}} width="500" height="400" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+        {{/if}}
+      </div>
+      <div class="{{testDisplay.twitter}}" style="width: 500px; height: 400px; overflow-y: scroll;">
+        {{#if twitter}}
+        <a class="twitter-timeline" href="https://twitter.com/elrond_rc?ref_src=twsrc%5Etfw">Tweets by elrond_rc</a>
+        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        {{/if}}
+      </div>
+      </div>
+    </div>
+</template>

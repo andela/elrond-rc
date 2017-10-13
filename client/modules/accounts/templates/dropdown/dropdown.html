@@ -50,6 +50,7 @@
         </a>
       </li>
     {{/each}}
+    {{> walletMenu}}
     <!-- Getting started dropdown -->
     <li id="onboarding" class="dropdown-apps-icon onboarding">
       <a id="dropdown-apps-onboarding" title="Get Started">
@@ -58,6 +59,17 @@
       </a>
     </li>
   </ul>
+</template>
+
+<template name="walletMenu">
+  <li id="wallet" class="dropdown-apps-icon">
+    <a href={{pathFor 'wallet'}} title="wallet">
+        <i class="fa fa-credit-card"></i>
+          <span class="icon-text">
+            Wallet
+          </span>
+      </a>
+  </li>
 </template>
 
 <template name="userAccountsDropdown">

@@ -79,6 +79,15 @@ Template.loginDropdown.events({
       Reaction.Router.go(route);
     }
     template.$(".dropdown-toggle").dropdown("toggle");
+  },
+  /**
+   * Wallet
+   * @param  {Event} event - jQuery Event
+   * @return {void}
+   */
+  "click #wallet": (event) => {
+    event.preventDefault();
+    FlowRouter.go("/wallet");
   }
 });
 // This is for owner or admin getting started (onboarding)
