@@ -49,9 +49,7 @@ function getNumberOfPages() {
 
 function check() {
   document.getElementById("next").disabled = currentPage === numberOfPages;
-
   document.getElementById("previous").disabled = currentPage === 1;
-
   document.getElementById("first").disabled = currentPage === 1;
   document.getElementById("last").disabled = currentPage === numberOfPages;
 }
@@ -60,7 +58,7 @@ function loadList() {
   list = Template.instance().state.get("transactionsList");
   let begin = (currentPage - 1) * numberPerPage;
   let end = begin + numberPerPage;
-  if (list[0] !== undefined) {
+  if (typeof list[0] !== "undefined") {
     pageList = list.slice(begin, end);
     Template.instance().state.set("transactions", pageList);
     check();
@@ -109,11 +107,12 @@ const getPaystackSettings = () => {
     name: "paystack",
     shopId: Reaction.getShopId()
   });
-
-  return {
-    public: "pk_test_3e07adc39d17fdb204c221ed2b2319ed6267d4df",
-    secret: "sk_test_25a0b8bda147712f8a6575eac5a048bda294d33c"
-  };
+  Meteor.call("paystack/getKeys", (err, keys) => {
+    return {
+      public: keys.public,
+      secret: keys.secret
+    };
+  });
 };
 
 const finalizeDeposit = transactions => {
