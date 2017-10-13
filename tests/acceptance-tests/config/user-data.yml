@@ -1,6 +1,7 @@
 admin_user: Admin
-admin_email: v8aecggj@localhost
-admin_pw: oaqdXNIJ
+admin_email: admin@localhost
+admin_pw: password
+
 
 guest_email: jim.hadi10@gmail.com
 guest_pw: 112233
