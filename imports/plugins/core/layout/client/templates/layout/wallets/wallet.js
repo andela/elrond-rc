@@ -163,7 +163,6 @@ function handlePayment(result) {
           createdAt: new Date()
         };
         if (type === "deposit") {
-          console.log(paystackResponse.amount, "bleh bleh");
           transactions = {
             amount: paystackResponse.amount / 100,
             referenceId: paystackResponse.reference,
