@@ -113,7 +113,6 @@ const getPaystackSettings = () => {
       secret: keys.secret
     };
   });
-  
 };
 
 const finalizeDeposit = transactions => {
