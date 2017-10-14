@@ -5,6 +5,9 @@ product_click: "[data-event-action='productClick']"
 
 login_pw_fld: "[class='form-control login-input-password']"
 login_btn: "[data-event-action='submitSignInForm']"
+product_click: "[data-event-action='productClick']"
+star_click: "[class='stars-rating']"
+send_review: "[class='btn btn-success']"
 
 #account profile
 pl_email_address_fld: "//div[2]/div/div/div/form/div/input"
