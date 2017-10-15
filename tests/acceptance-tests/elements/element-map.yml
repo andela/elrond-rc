@@ -1,7 +1,13 @@
 login_dropdown_btn: "[data-event-action='accounts-dropdown-click']"
 login_email_fld: "[class='form-control login-input-email']"
+#twitter and #facebook
+product_click: "[data-event-action='productClick']"
+
 login_pw_fld: "[class='form-control login-input-password']"
 login_btn: "[data-event-action='submitSignInForm']"
+product_click: "[data-event-action='productClick']"
+star_click: "[class='stars-rating']"
+send_review: "[class='btn btn-success']"
 
 #account profile
 pl_email_address_fld: "//div[2]/div/div/div/form/div/input"
@@ -93,11 +99,25 @@ stripe_complete_order_btn: "//form[@id='stripe-payment-form']/button"
 # order confirmation page
 thank_you_txt: "h3 > span"
 
+# digital product
+skip_tour: "[class='introjs-button introjs-skipbutton']"
+open_create_product: "[class='rui font-icon fa fa-plus']"
+create_product: "[class='rui button btn btn-default undefined']"
+input_title: "[class='text-edit-input pdp product-detail-edit title-edit-input']"
+input_subtitle: "[class='text-edit-input pdp product-detail-edit pageTitle-edit-input']"
+input_description: "[class='{this.props.name}-edit-input']"
+select_product_type: "[id='digital']"
+select_digital: "[class='digital-category']"
+add_product_to_cart: "[class='input-group-addon add-to-cart-text js-add-to-cart']"
+
 # Static page locators
 account_dropdown: "#accounts"
+analytics: "(//h3[@class='title'])[2]"
 dashboard_dropdown: "#dropdown-apps-dashboard"
+dashboard: "[class='rui font-icon icon-reaction-logo']"
 manage_static_page: "(//h3[@class='title'])[4]"
 created_page: "(//a[@id='About-Page'])"
 delete_page: "[class='btn btn-default deletePage']"
 confirm_delete: "[class='swal2-confirm swal2-styled']"
 home_page: "[class='brand']"
+confirm_cancel_order: "(//button[@class='swal2-confirm swal2-styled'])"

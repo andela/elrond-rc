@@ -2,16 +2,16 @@
 require("dotenv").load();
 const yaml = require("js-yaml");
 const fs   = require("fs");
+const dotenv = require("dotenv");
 const expect = require("chai").expect;
 const getId = require("../../../lib/get-elements.js");
+
+dotenv.load();
 
 beforeEach(function () {
   const browserConfig = yaml.safeLoad(fs.readFileSync("./tests/acceptance-tests/config/settings.yml", "utf8"));
   const baseUrl = process.env.REACTION_BASE_URL || browserConfig.base_url.toString();
   browser.url(baseUrl);
-  // browser.getSession().then(function (sessionid) {
-  //   browser.sessionID = sessionid.id_;
-  // });
 });
 
 describe("simple login test", function () {
@@ -20,7 +20,6 @@ describe("simple login test", function () {
     const eleIds = yaml.safeLoad(fs.readFileSync("./tests/acceptance-tests/elements/element-ids.yml", "utf8"));
     const usrData = yaml.safeLoad(fs.readFileSync("./tests/acceptance-tests/config/user-data.yml", "utf8"));
 
-    // default to process env if we've got that
     const adminEmail = process.env.REACTION_EMAIL || usrData.admin_email;
     const adminPassword = process.env.REACTION_AUTH || usrData.admin_pw;
     const adminUserName = process.env.REACTION_USER || usrData.admin_user;
