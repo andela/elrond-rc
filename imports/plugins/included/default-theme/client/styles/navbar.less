@@ -64,8 +64,9 @@
        -o-transition: opacity 0.1s ease-out;
           transition: opacity 0.1s ease-out;
 }
-.introjs-helperLayer{
-  background-color: transparent;
+
+.introjs-showElement.introjs-relativePosition, .introjs-showElement.introjs-relativePosition * {
+  color: black;
 }
 .rui.navbar .rui.tagnav {
   background: transparent;
@@ -268,6 +269,10 @@
   height: @navbar-height;
   padding: 0px @navbar-padding-vertical;
   cursor: pointer;
+  padding: 23px;
+    & span{
+      padding-left: 4px;
+    }
 }
 .rui.navbar .tour:hover {
   background-color: @navbar-default-toggle-icon-bar-bg;

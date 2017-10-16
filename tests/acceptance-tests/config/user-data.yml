@@ -3,13 +3,15 @@ admin_email: admin@localhost
 admin_pw: password
 
 
-<<<<<<< Updated upstream
+
 guest_email: jim.hadi10@gmail.com
 guest_pw: 112233
-=======
+
 guest_email: michaelozoemena2@email.com
 guest_pw: 123456
->>>>>>> Stashed changes
+
+guest_email: louisdante@email.com
+guest_pw: biology1
 
 # shop address
 country: US

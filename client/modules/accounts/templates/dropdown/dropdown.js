@@ -73,7 +73,7 @@ Template.loginDropdown.events({
           });
         }
       });
-    } else if (this.route || this.name) {
+  } else if (this.route || this.name) {
       event.preventDefault();
       const route = this.name || this.route;
       Reaction.Router.go(route);
