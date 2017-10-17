@@ -10,6 +10,8 @@ let pageList = [];
 let currentPage = 1;
 const numberPerPage = 10;
 let numberOfPages = 0;
+let public;
+let secret;
 
 Template.wallet.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
@@ -101,18 +103,20 @@ function confirmTransfer(transaction, recipient) {
   );
 }
 
-
+Meteor.call("paystack/getKeys", (err, keys) => {
+  public = keys.public;
+  secret = keys.secret;
+});
 const getPaystackSettings = () => {
   const paystack = Packages.findOne({
     name: "paystack",
     shopId: Reaction.getShopId()
   });
-  Meteor.call("paystack/getKeys", (err, keys) => {
-    return {
-      public: keys.public,
-      secret: keys.secret
-    };
-  });
+  
+  return {
+    public,
+    secret
+  };
 };
 
 const finalizeDeposit = transactions => {
