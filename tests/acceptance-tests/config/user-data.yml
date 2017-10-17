@@ -3,6 +3,13 @@ admin_email: admin@localhost
 admin_pw: password
 
 
+
+guest_email: jim.hadi10@gmail.com
+guest_pw: 112233
+
+guest_email: michaelozoemena2@email.com
+guest_pw: 123456
+
 guest_email: louisdante@email.com
 guest_pw: biology1
 
