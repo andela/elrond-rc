@@ -73,11 +73,33 @@ Template.loginDropdown.events({
           });
         }
       });
-    } else if (this.route || this.name) {
+  } else if (this.route || this.name) {
       event.preventDefault();
       const route = this.name || this.route;
       Reaction.Router.go(route);
     }
     template.$(".dropdown-toggle").dropdown("toggle");
+  },
+  /**
+   * Wallet
+   * @param  {Event} event - jQuery Event
+   * @return {void}
+   */
+  "click #wallet": (event) => {
+    event.preventDefault();
+    FlowRouter.go("/wallet");
   }
 });
+// This is for owner or admin getting started (onboarding)
+Template.accountsDropdownApps.onRendered(function () {
+  if (Reaction.hasAdminAccess()) {
+    // Display getting started for the admin or shop owner
+    $("#onboarding").removeClass("onboarding");
+  }
+});
+Template.accountsDropdownApps.events({
+  "click #dropdown-apps-onboarding": function (event) {
+    event.preventDefault();
+    Reaction.Router.go("/reaction/get-started");
+  }
+})

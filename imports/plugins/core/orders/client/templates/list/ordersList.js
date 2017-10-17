@@ -1,6 +1,7 @@
 import moment from "moment";
 import { Template } from "meteor/templating";
-import { Orders, Shops } from "/lib/collections";
+import { Orders, Shops, Products } from "/lib/collections";
+import { i18next } from "/client/api";
 
 /**
  * dashboardOrdersList helpers
@@ -8,9 +9,30 @@ import { Orders, Shops } from "/lib/collections";
  */
 Template.dashboardOrdersList.helpers({
   orderStatus() {
-    if (this.workflow.status === "coreOrderCompleted") {
-      return true;
+    if (this.workflow.status === "coreOrderWorkflow/completed") {
+      return i18next.t("order.completed");
+    } else if (this.workflow.status === "canceled") {
+      return "Canceled";
     }
+    return i18next.t("order.processing");
+  },
+  isDigital() {
+    const productId = this.items[0].productId;
+    const sub = Meteor.subscribe("Product", productId);
+    if (sub.ready()) {
+      const product = Products.findOne(productId);
+      return product.isDigital;
+    }
+    return false;
+  },
+  downloadUrl() {
+    const productId = this.items[0].productId;
+    const sub = Meteor.subscribe("Product", productId);
+    if (sub.ready()) {
+      const product = Products.findOne(productId);
+      return product.downloadUrl;
+    }
+    return null;
   },
   orders(data) {
     if (data.hash.data) {
