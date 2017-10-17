@@ -36,7 +36,7 @@ describe("Digital product", function () {
     browser.click("#btn-checkout");
     browser.waitForExist(".text-left");
     browser.click(".text-left");
-    browser.pause(5000);    
+    browser.pause(5000);
     browser.click("//span[text()='Free Shipping']");
     browser.pause(2000);
     browser.click("//span[text()='Example Payment']");
