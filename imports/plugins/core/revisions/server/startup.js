@@ -1,3 +1,4 @@
+/* eslint-disable */
 import _ from "lodash";
 import { diff } from "deep-diff";
 import { Meteor } from "meteor/meteor";
@@ -78,7 +79,7 @@ export const ProductRevision = {
         let priceMin = Number.POSITIVE_INFINITY;
         let priceMax = Number.NEGATIVE_INFINITY;
 
-        visibleChildren.map((child) => { // eslint-disable-line
+        visibleChildren.map((child) => { 
           if (child.price < priceMin) {
             priceMin = child.price;
             return priceMin;
@@ -169,7 +170,7 @@ export const ProductRevision = {
     return variant.inventoryQuantity || 0;
   }
 };
-/*  eslint-disable */
+
 Media.files.before.insert((userid, media) => {
   if (RevisionApi.isRevisionControlEnabled() === false) {
     return true;
