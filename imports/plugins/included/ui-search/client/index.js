@@ -17,8 +17,12 @@ import "./templates/productSearch/notFoundProduct.html";
 
 // Order Search
 import "./templates/orderSearch/orderResults.html";
-import "./templates/orderSearch/orderResults.js";
+import "./templates/orderSearch/orderResults";
 
 // Account Search
 import "./templates/accountSearch/accountResults.html";
-import "./templates/accountSearch/accountResults.js";
+import "./templates/accountSearch/accountResults";
+
+// Filter Search Results
+import "./templates/searchModal/filterSearch.html";
+import "./templates/searchModal/filterSearch";

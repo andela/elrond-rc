@@ -40,11 +40,15 @@ export function createShopFactory() {
         verified: faker.random.boolean()
       }
     ],
-    currency: "USD", // could use faker.finance.currencyCode()
+    currency: "NGN", // could use faker.finance.currencyCode()
     currencies: {
       USD: {
         format: "%s%v",
         symbol: "$"
+      },
+      NGN: {
+        format: "%s%v",
+        symbol: "₦"
       },
       EUR: {
         format: "%v %s",

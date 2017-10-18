@@ -181,6 +181,12 @@ Router.initPackageRoutes = () => {
         ReactionLayout(Session.get("INDEX_OPTIONS") || {});
       }
     });
+    shop.route("/wallet", {
+      name: "wallet",
+      action() {
+        ReactionLayout({ template: "wallet" });
+      }
+    });
     // Static Pages View Route
     Router.route("/pages/:slug", {
       action(params) {

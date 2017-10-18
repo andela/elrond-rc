@@ -2,6 +2,7 @@ import _ from "lodash";
 import React from "react";
 import { DataType } from "react-taco-table";
 import { Template } from "meteor/templating";
+import { Session } from "meteor/session";
 import { i18next } from "/client/api";
 import { ProductSearch, Tags, OrderSearch, AccountSearch } from "/lib/collections";
 import { IconButton, SortableTable } from "/imports/plugins/core/ui/client/components";
@@ -43,10 +44,55 @@ Template.searchModal.onCreated(function () {
     }
   });
 
+  // Filter products by price
+  const priceFilter = (products, query) => {
+    return _.filter(products, (product) => {
+      if (product.price) {
+        const productMaxPrice = parseFloat(product.price.max);
+        const productMinPrice = parseFloat(product.price.min);
+        const queryMaxPrice = parseFloat(query[1]);
+        const queryMinPrice = parseFloat(query[0]);
+        if (productMinPrice >= queryMinPrice && productMaxPrice <= queryMaxPrice) {
+          return true;
+        }
+        return false;
+      }
+    });
+  };
+  // Sort products by price
+  const sort = (products, type) => {
+    return products.sort((a, b) => {
+      const A = a.price === null ? -1 : a.price.min;
+      const B = b.price === null ? -1 : b.price.min;
+      if (A < B) {
+        return type === "DESC" ? 1 : -1;
+      } else if (A > B) {
+        return type === "ASC" ? 1 : -1;
+      }
+      return 0;
+    });
+  };
+  const filterProductsByLatest = (products, latestQuery) => {
+    if (latestQuery === "oldest") {
+      return products.reverse();
+    }
+    return products;
+  };
+
+  // Filter products by Vendor
+  function vendorFilter(products, vendors) {
+    return _.filter(products, (product) => {
+      return product.vendor === vendors;
+    });
+  }
 
   this.autorun(() => {
     const searchCollection = this.state.get("searchCollection") || "products";
     const searchQuery = this.state.get("searchQuery");
+    const priceQuery = Session.get("filterPrice");
+    const vendorQuery = Session.get("filterVendor");
+    const sortQuery = Session.get("sortValue");
+    const latestQuery = Session.get("sortByLatest");
     const facets = this.state.get("facets") || [];
     const sub = this.subscribe("SearchResults", searchCollection, searchQuery, facets);
 
@@ -55,7 +101,21 @@ Template.searchModal.onCreated(function () {
        * Product Search
        */
       if (searchCollection === "products") {
-        const productResults = ProductSearch.find().fetch();
+        let productResults = ProductSearch.find().fetch();
+        if (!["null", "all"].includes(priceQuery) && priceQuery) {
+          const range = priceQuery.split("-");
+          productResults = priceFilter(productResults, range);
+        }
+        if (!["null", "all"].includes(vendorQuery) && vendorQuery) {
+          productResults = vendorFilter(productResults, vendorQuery);
+        }
+        if (!["null", "all"].includes(latestQuery) && latestQuery) {
+          productResults = filterProductsByLatest(productResults, latestQuery);
+        }
+        if (sortQuery !== "null" && sortQuery) {
+          productResults = sort(productResults, sortQuery);
+        }
+
         const productResultsCount = productResults.length;
         this.state.set("productSearchResults", productResults);
         this.state.set("productSearchCount", productResultsCount);
@@ -148,6 +208,11 @@ Template.searchModal.helpers({
   },
   showSearchResults() {
     return false;
+  },
+  hasResults() {
+    const instance = Template.instance();
+    const sortResults = instance.state.get("productSearchResults").length;
+    return sortResults > 0;
   }
 });
 
@@ -188,6 +253,10 @@ Template.searchModal.events({
     $(".js-search-modal").delay(400).fadeOut(400, () => {
       Blaze.remove(view);
     });
+  },
+  "click [data-event-action=filterClick]": function () {
+    $("#filterSearch").toggleClass("hidden");
+    $("#toggleTags").toggleClass("hidden");
   },
   "click [data-event-action=clearSearch]": function (event, templateInstance) {
     $("#search-input").val("");

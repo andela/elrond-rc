@@ -11,7 +11,6 @@
 *.sublime-project
 *.sublime-workspace
 .env
-
 jsdoc.json
 lib-cov
 logs
@@ -37,7 +36,6 @@ public/custom/*
 private/custom/*
 !private/custom/.gitkeep
 
-imports/plugins/custom/*
 !imports/plugins/custom/.gitkeep
 
 .reaction/config.json
