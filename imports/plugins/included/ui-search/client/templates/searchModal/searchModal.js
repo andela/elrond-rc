@@ -228,7 +228,7 @@ Template.searchModal.events({
     if (searchQuery.length === 0) {
       templateInstance.state.set("searchQuery", " ");
     } else {
-    templateInstance.state.set("searchQuery", searchQuery);
+      templateInstance.state.set("searchQuery", searchQuery);
     $(".search-modal-header:not(.active-search)").addClass(".active-search");
     if (!$(".search-modal-header").hasClass("active-search")) {
       $(".search-modal-header").addClass("active-search");

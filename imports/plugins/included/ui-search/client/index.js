@@ -13,7 +13,6 @@ import "./templates/productSearch/productItem.html";
 import "./templates/productSearch/productItem.js";
 import "./templates/productSearch/content.html";
 import "./templates/productSearch/content.js";
-import "./templates/productSearch/notFoundProduct.html";
 
 // Order Search
 import "./templates/orderSearch/orderResults.html";
@@ -26,3 +25,4 @@ import "./templates/accountSearch/accountResults";
 // Filter Search Results
 import "./templates/searchModal/filterSearch.html";
 import "./templates/searchModal/filterSearch";
+import "./templates/searchModal/notFoundProduct.html";
