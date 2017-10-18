@@ -28,48 +28,55 @@ Meteor.methods({
   "orders/sendEmail": (payload) => {
     check(payload, Object);
     const mailHead = `
-      <table style='border: 1px solid black; text-align:center; width: 100%'>
-        <tr>
-          <thead>
-            <td colspan='2' style='background: gray; color: white; font-family: tahoma;'>
-              <h3>Reaction</h3>
-            </td>
-          </thead>
+    <div>
+      <hr style="height: 2px; background-color: DodgerBlue; width: 100%;">
+      <div>
+          <h2 style="margin-top: 25px;">Congratulations!</h2>
+          <p>Your are receiving this with respect to the order you made on Reaction Commerce.</p>
+      </div>
+      <table style="border-collapse: collapse; width: 100%;">
+          <tr>
+              <thead>
+                  <td colspan='2' style='background: white; color: black; font-family: tahoma;'>
+                      <h3>Reaction e-commerce</h3>
+                  </td>
+              </thead>
+          </tr>
+          <tbody>
+          <tr>
+          <td style="text-align: left; padding: 8px;"><b>Product Name</b></td>
+          <td style="text-align: left; padding: 8px;"> ${payload.dataForOrderEmail.order.items[0].title} </td>
         </tr>
-        <tbody>
-          <tr>
-            <td> Name </td>
-            <td> ${payload.dataForOrderEmail.order.items[0].title} </td>
-          </tr>
-          <tr>
-            <td> Status </td>
-            <td> ${payload.message} </td>
-          </tr>
-          <tr>
-            <td> Quantity </td>
-            <td> ${payload.dataForOrderEmail.order.items[0].quantity} </td>
-          </tr>
-          <tr>
-            <td> Price </td>
-            <td> ${payload.dataForOrderEmail.billing.total} </td>
-          </tr>
-          <tr>
-            <td> Image </td>
-            <td> ${payload.dataForOrderEmail.order.items[0].placeholderImage} </td>
-          </tr>
-          <tr>
-            <td> Order Date </td>
-            <td> ${payload.dataForOrderEmail.orderDate} </td>
-          </tr>
-          <tr>
-            <td colspan='2'>
-              <a href='${payload.dataForOrderEmail.homepage}'>
-                Ⓒ ${payload.dataForOrderEmail.copyrightDate} Reaction
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>`;
+        <tr style="background-color: #f2f2f2">
+          <td style="text-align: left; padding: 8px;"><b> Product Status</b></td>
+          <td style="text-align: left; padding: 8px;"> ${payload.message} </td>
+        </tr>
+        <tr>
+          <td style="text-align: left; padding: 8px;"><b>Product Quantity</b> </td>
+          <td style="text-align: left; padding: 8px;"> ${payload.dataForOrderEmail.order.items[0].quantity} </td>
+        </tr>
+        <tr style="background-color: #f2f2f2">
+          <td style="text-align: left; padding: 8px;"><b>Product Price</b></td>
+          <td style="text-align: left; padding: 8px;"> NGN ${payload.dataForOrderEmail.billing.total} </td>
+        </tr>
+        <tr>
+          <td style="text-align: left; padding: 8px;"><b>Product Image</b></td>
+          <td style="text-align: left; padding: 8px;"> ${payload.dataForOrderEmail.order.items[0].placeholderImage} </td>
+        </tr>
+        <tr style="background-color: #f2f2f2">
+          <td style="text-align: left; padding: 8px;"><b>Order Date</b></td>
+          <td style="text-align: left; padding: 8px;"> ${payload.dataForOrderEmail.orderDate} </td>
+        </tr>
+          </tbody>
+      </table>
+      <br>
+      <div style="margin-bottom: 25px;">
+          <h5>Thank you.</h5>
+          <p>Yours,<br> <b>Reaction e-commerce</b>
+          </p>
+      </div>
+      <hr style="height: 2px; background-color: DodgerBlue; width: 100%;">
+      </div>`;
 
     const mailOptions = {
       from: '"Reaction Commerce" <enlrondrc29@gmail.com>',
