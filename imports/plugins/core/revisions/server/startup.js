@@ -67,22 +67,25 @@ export const ProductRevision = {
     const visibleChildren = children.filter(child => child.isVisible);
 
     switch (visibleChildren.length) {
-      case 0:
+      case 0: {
         const topVariant = this.getProduct(variantId);
         // topVariant could be undefined when we removing last top variant
         return topVariant && topVariant.price;
+      }
       case 1:
         return visibleChildren[0].price;
-      default:
+      default: {
         let priceMin = Number.POSITIVE_INFINITY;
         let priceMax = Number.NEGATIVE_INFINITY;
 
-        visibleChildren.map(child => {
+        visibleChildren.map((child) => { // eslint-disable-line
           if (child.price < priceMin) {
             priceMin = child.price;
+            return priceMin;
           }
           if (child.price > priceMax) {
             priceMax = child.price;
+            return priceMax;
           }
         });
 
@@ -91,6 +94,7 @@ export const ProductRevision = {
           return priceMin.toString();
         }
         return `${priceMin} - ${priceMax}`;
+      }
     }
   },
 
@@ -111,7 +115,7 @@ export const ProductRevision = {
       documentId: variantId
     });
 
-    return revision && revision.documentData || product;
+    return revision && revision.documentData || product; // eslint-disable-line
   },
 
   getTopVariants(id) {
@@ -165,7 +169,7 @@ export const ProductRevision = {
     return variant.inventoryQuantity || 0;
   }
 };
-
+/*  eslint-disable */
 Media.files.before.insert((userid, media) => {
   if (RevisionApi.isRevisionControlEnabled() === false) {
     return true;
@@ -683,3 +687,4 @@ Revisions.after.update(function (userId, revision) {
 }, {
   fetchPrevious: false
 });
+/* eslint-enable */
