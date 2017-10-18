@@ -18,6 +18,8 @@
     {{#if hasResults }} 
     {{> searchResults productSearchResults=productSearchResults orderSearchResults=orderSearchResults accountSearchResults=accountSearchResults
     orderTable=orderTable accountTable=accountTable }} 
+    {{else}}
+    {{> notFoundProducts }}
     {{/if}}
 
   </div>

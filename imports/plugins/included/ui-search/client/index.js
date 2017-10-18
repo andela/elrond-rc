@@ -12,7 +12,7 @@ import "./templates/productSearch/productSearchTags.html";
 import "./templates/productSearch/productItem.html";
 import "./templates/productSearch/productItem";
 import "./templates/productSearch/content.html";
-import "./templates/productSearch/content";
+import "./templates/productSearch/content.js";
 
 // Order Search
 import "./templates/orderSearch/orderResults.html";
@@ -25,3 +25,4 @@ import "./templates/accountSearch/accountResults";
 // Filter Search Results
 import "./templates/searchModal/filterSearch.html";
 import "./templates/searchModal/filterSearch";
+import "./templates/searchModal/notFoundProduct.html";

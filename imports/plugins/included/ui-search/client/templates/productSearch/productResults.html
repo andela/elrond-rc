@@ -1,19 +1,21 @@
 <template name="productResults">
   <div class="container-main">
     <div class="product-grid">
+      {{ #if productSearchResults }}
       <ul class="product-grid-list list-unstyled" id="product-grid-list">
         {{#each product in productSearchResults}}
           {{> productItem product=product}}
-        {{else}}
+        {{/each}}
+              </ul>
+                {{else}}
           <div class="row">
             <div class="text-center">
-              <h3>
-                <span data-i18n="search.noProductsFound">No products found.</span>
-              </h3>
+              <h1>
+                <span data-i18n="search.noProductsFound" style="color:black"> No products found.</span>
+              </h1>
             </div>
           </div>
-        {{/each}}
-      </ul>
+          {{/if}}
     </div>
   </div>
 </template>
