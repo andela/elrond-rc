@@ -25,7 +25,7 @@ Template.searchModal.onCreated(function () {
     initialLoad: true,
     slug: "",
     canLoadMoreProducts: false,
-    searchQuery: "",
+    searchQuery: " ",
     productSearchResults: [],
     tagSearchResults: []
   });
@@ -138,6 +138,7 @@ Template.searchModal.helpers({
   productSearchResults() {
     const instance = Template.instance();
     const results = instance.state.get("productSearchResults");
+    // console.log(results);
     return results;
   },
   tagSearchResults() {
@@ -159,10 +160,14 @@ Template.searchModal.events({
   "keyup input": (event, templateInstance) => {
     event.preventDefault();
     const searchQuery = templateInstance.find("#search-input").value;
+    if (searchQuery.length === 0) {
+      templateInstance.state.set("searchQuery", " ");
+    } else {
     templateInstance.state.set("searchQuery", searchQuery);
     $(".search-modal-header:not(.active-search)").addClass(".active-search");
     if (!$(".search-modal-header").hasClass("active-search")) {
       $(".search-modal-header").addClass("active-search");
+    }
     }
   },
   "click [data-event-action=filter]": function (event, templateInstance) {

@@ -4,6 +4,8 @@
     <div class="rui search-modal-results">
       {{#if productSearchResults}}
         {{> productResults productSearchResults=productSearchResults}}
+        {{else}}
+        {{> notFound2 }}
       {{/if}}
 
       {{#if orderSearchResults}}
